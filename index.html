@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="In this paper, we present Focus4Dex, bridging task-critical visual discovery with local action conditioning to resolve both where to focus and how to manipulate in precise dexterous manipulation.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Focus4Dex: Action-Guided Visual Information Selection and Utilization for Dexterous Manipulation</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="paired-video.js" defer></script>
+  <script src="task-carousel.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><div class="nav-inner">
+    <a href="#top" class="wordmark"><img src="assets/logo.png" alt="Focus4Dex" width="1774" height="887"></a>
+    <nav aria-label="Focus4Dex"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#experiment">Experiment</a><a href="#tasks">Tasks</a><a href="#bibtex">BibTeX</a></nav>
+    <a class="nav-paper" href="assets/paper.pdf" target="_blank" rel="noopener">Paper</a>
+  </div></header>
+  <main id="top">
+    <div class="hero wrap">
+      <h1><span class="hero-name">Focus4Dex:</span> Action-Guided Visual Information Selection and Utilization for Dexterous Manipulation</h1>
+      <div class="authors"><div class="author-row"><span data-author="0">Wensi Huang<sup>1,2,3*</sup></span>, <span data-author="1">Yangkun Zhu<sup>3</sup></span>, <span data-author="2">Tutian Tang<sup>3,4</sup></span>, <span data-author="3">Wanli Xing<sup>2</sup></span>, <span data-author="4">Xingyu Ji<sup>2,4</sup></span></div>
+<div class="author-row"><span data-author="5">Yang Li<sup>3</sup></span>, <span data-author="6">Feng Zhao<sup>1†</sup></span>, <span data-author="7">Kaifeng Zhang<sup>2†</sup></span>, <span data-author="8">Qiaojun Yu<sup>3,4†</sup></span>, <span data-author="9">Weinan Zhang<sup>3,4</sup></span></div></div>
+      <div class="affiliations"><span><sup>1</sup>University of Science and Technology of China</span><span><sup>2</sup>Sharpa</span><span><sup>3</sup>Shanghai Artificial Intelligence Laboratory</span><span><sup>4</sup>Shanghai Jiao Tong University</span></div>
+      <div class="author-notes"><span><sup>†</sup>Corresponding Authors</span></div>
+      <div class="hero-actions"><a class="button primary" href="assets/paper.pdf" target="_blank" rel="noopener">Paper</a><button class="button" type="button" disabled>Code &amp; Data (Coming Soon)</button></div>
+    </div>
+
+    <section class="teaser-section wrap" id="teaser">
+      <a class="figure-link" href="assets/teaser.webp" target="_blank" rel="noopener"><img src="assets/teaser.webp" width="3400" height="1432" alt="Action-Guided Visual Focus for Dexterous Manipulation."></a>
+      <p class="hero-statement" data-copy="hero">In this paper, we present Focus4Dex, bridging task-critical visual discovery with local action conditioning to resolve both where to focus and how to manipulate in precise dexterous manipulation.</p>
+    </section>
+
+    <section class="abstract-section" id="abstract"><div class="wrap">
+      <h2 class="section-title">Abstract</h2><p class="abstract-copy" data-copy="abstract">Recent progress in robotic hardware and foundation models has enabled sophisticated dexterous skills, including tool use and deformable object manipulation. However, while existing methods predominantly investigate tactile and force feedback in such contact-rich tasks, fine-grained visual perception remains largely underexplored. In this paper, we present Focus4Dex, bridging task-critical visual discovery with local action conditioning to resolve both where to focus and how to manipulate in precise dexterous manipulation. Our pipeline comprises three components: (1) Action-sensitive Visual Region (AVR) Discovery, which identifies teacher AVRs offline via localized visual perturbations; (2) an online AVR Localization Module supervised by these teacher AVRs to predict AVRs in real time without online perturbations; and (3) Action-conditioned Visual Modulation, which combines local visual features and region geometry to modulate the action expert via gated adaptive RMS normalization (AdaRMS) while preserving global scene representations. Evaluated across four real-world tasks spanning tool use and deformable object manipulation, Focus4Dex achieves a 50.5% mean success rate, outperforming the strongest baseline by 12.5 percentage points. Comprehensive ablations further verify the effectiveness of our conditioning design.</p>
+      <div class="abstract-demo" id="demo">
+        <div id="supplementary"><video class="full-video" controls playsinline preload="metadata" poster="assets/demo-poster.jpg" aria-label="Demo"><source src="assets/demo.mp4" type="video/mp4"></video></div>
+      </div>
+    </div></section>
+
+    <section class="method-section" id="method"><div class="wrap">
+      <div class="section-heading"><h2 class="section-title">Method</h2><p data-copy="pipeline_title">Overview of the Focus4Dex Framework.</p></div>
+      <a class="figure-link pipeline" href="assets/pipeline.webp" target="_blank" rel="noopener"><img src="assets/pipeline.webp" width="3400" height="1330" alt="Overview of the Focus4Dex Framework." loading="lazy"></a>
+      <div class="components"><article><h3 data-copy="method_components.0.title">Action-sensitive Visual Region (AVR) Discovery</h3><p data-copy="method_components.0.description">Action-sensitive Visual Region (AVR) Discovery feeds clean and locally blurred images into a reference policy, converting action shifts into an Action Sensitivity Map to extract the teacher AVR.</p></article><article><h3 data-copy="method_components.1.title">AVR Localization Module</h3><p data-copy="method_components.1.description">AVR Localization Module processes the VLM global prefix (global views, language, and state) via an MLP head to regress online AVR predictions, supervised by the teacher AVRs from (a).</p></article><article><h3 data-copy="method_components.2.title">Action-conditioned Visual Modulation</h3><p data-copy="method_components.2.description">Action-conditioned Visual Modulation encodes the local visual crop via a local visual feature adapter and fuses the resulting features with a region geometry embedding through an AVR condition projector to modulate the action expert via gated suffix AdaRMS.</p></article></div>
+    </div></section>
+
+    <section class="results-section" id="experiment"><div class="wrap">
+      <div class="section-heading" id="experiments"><h2 class="section-title">Experiment</h2><p data-copy="table.title">Main Real-World Comparison.</p></div>
+      <p class="results-summary" data-copy="results_summary">Evaluated across four real-world tasks spanning tool use and deformable object manipulation, Focus4Dex achieves a 50.5% mean success rate, outperforming the strongest baseline by 12.5 percentage points.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Main Real-World Comparison."><table><thead><tr><th scope="col">Policy</th><th scope="col">Paper Folding</th><th scope="col">Paper Cutting</th><th scope="col">Paper Unfolding</th><th scope="col">Thread Cutting</th><th scope="col">Mean</th></tr></thead><tbody><tr><th scope="row">LingBot-VA</th><td>16%</td><td>0%</td><td>10%</td><td>42%</td><td>17.0%</td></tr><tr><th scope="row">OpenWAM</th><td>18%</td><td>0%</td><td>12%</td><td>48%</td><td>19.5%</td></tr><tr><th scope="row">DM0.5</th><td>42%</td><td>0%</td><td>26%</td><td>12%</td><td>20.0%</td></tr><tr><th scope="row">π₀</th><td>60%</td><td>22%</td><td>12%</td><td>34%</td><td>32.0%</td></tr><tr><th scope="row">π₀.₅</th><td>62%</td><td>36%</td><td>18%</td><td>36%</td><td>38.0%</td></tr><tr class="ours"><th scope="row">Focus4Dex (Ours)</th><td>76%</td><td>42%</td><td>30%</td><td>54%</td><td>50.5%</td></tr></tbody></table></div>
+      <p class="table-caption" data-copy="table.caption">Main Real-World Comparison. Task success rates (%) over 50 trials per task and method on the 65-DoF bimanual platform. Mean denotes the unweighted average across tasks; bold marks the highest observed success rate in each column.</p>
+    </div></section>
+
+    <section class="tasks-section" id="tasks"><div class="wrap">
+      <div class="section-heading"><h2 class="section-title">Tasks</h2></div>
+      <div class="task-tabs" role="tablist" aria-label="Tasks"><button type="button" role="tab" id="tab-paper-folding" aria-controls="panel-paper-folding" aria-selected="false" tabindex="-1">Paper Folding</button><button type="button" role="tab" id="tab-paper-cutting" aria-controls="panel-paper-cutting" aria-selected="true" tabindex="0">Paper Cutting</button><button type="button" role="tab" id="tab-paper-unfolding" aria-controls="panel-paper-unfolding" aria-selected="false" tabindex="-1">Paper Unfolding</button><button type="button" role="tab" id="tab-thread-cutting" aria-controls="panel-thread-cutting" aria-selected="false" tabindex="-1">Thread Cutting</button></div>
+      <section class="task-panel paired" id="panel-paper-folding" role="tabpanel" aria-labelledby="tab-paper-folding" hidden>
+      <div class="task-showcase"><div class="task-carousel" role="region" aria-roledescription="carousel" aria-label="Paper Folding">
+          <div class="carousel-viewport" tabindex="0" aria-label="Paper Folding videos"><div class="carousel-track"><div class="carousel-slide" role="group" aria-label="1 / 2" aria-hidden="false" ><div class="video-pair" data-label="Paper Folding 1" role="group" aria-label="Paper Folding 1">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-folding-front.jpg" src="assets/paper-folding-front.mp4" aria-label="Paper Folding 1 (front)"></video><span class="speed">4X</span></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-folding.jpg" src="assets/paper-folding.mp4" aria-label="Paper Folding 1 (head)"></video><span class="speed">4X</span></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Folding 1" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Folding 1 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div><div class="carousel-slide" role="group" aria-label="2 / 2" aria-hidden="true" inert><div class="video-pair" data-label="Paper Folding 2" role="group" aria-label="Paper Folding 2">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-folding-slide3-front.jpg" src="assets/paper-folding-slide3-front.mp4" aria-label="Paper Folding 2 (front)"></video></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-folding-slide3-head.jpg" src="assets/paper-folding-slide3-head.mp4" aria-label="Paper Folding 2 (head)"></video></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Folding 2" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Folding 2 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div></div></div>
+          <button class="carousel-arrow previous" type="button" aria-label="Previous Paper Folding videos"><span aria-hidden="true"></span></button>
+          <button class="carousel-arrow next" type="button" aria-label="Next Paper Folding videos"><span aria-hidden="true"></span></button>
+          <div class="carousel-dots"><button class="carousel-dot" type="button" aria-label="Show Paper Folding 1" aria-current="true"></button><button class="carousel-dot" type="button" aria-label="Show Paper Folding 2" aria-current="false"></button></div>
+        </div></div>
+      <div class="task-copy"><h3 data-copy="tasks.0.title">Paper Folding</h3><p data-copy="tasks.0.description">The robot coordinates both dexterous hands to execute two successive folds on a flat sheet of paper.</p></div>
+    </section><section class="task-panel paired" id="panel-paper-cutting" role="tabpanel" aria-labelledby="tab-paper-cutting" >
+      <div class="task-showcase"><div class="task-carousel" role="region" aria-roledescription="carousel" aria-label="Paper Cutting">
+          <div class="carousel-viewport" tabindex="0" aria-label="Paper Cutting videos"><div class="carousel-track"><div class="carousel-slide" role="group" aria-label="1 / 2" aria-hidden="false" ><div class="video-pair" data-label="Paper Cutting 1" role="group" aria-label="Paper Cutting 1">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-cutting-front.jpg" src="assets/paper-cutting-front.mp4" aria-label="Paper Cutting 1 (front)"></video><span class="speed">4X</span></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-cutting.jpg" src="assets/paper-cutting.mp4" aria-label="Paper Cutting 1 (head)"></video><span class="speed">4X</span></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Cutting 1" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Cutting 1 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div><div class="carousel-slide" role="group" aria-label="2 / 2" aria-hidden="true" inert><div class="video-pair" data-label="Paper Cutting 2" role="group" aria-label="Paper Cutting 2">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-cutting-slide3-front.jpg" src="assets/paper-cutting-slide3-front.mp4" aria-label="Paper Cutting 2 (front)"></video></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-cutting-slide3-head.jpg" src="assets/paper-cutting-slide3-head.mp4" aria-label="Paper Cutting 2 (head)"></video></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Cutting 2" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Cutting 2 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div></div></div>
+          <button class="carousel-arrow previous" type="button" aria-label="Previous Paper Cutting videos"><span aria-hidden="true"></span></button>
+          <button class="carousel-arrow next" type="button" aria-label="Next Paper Cutting videos"><span aria-hidden="true"></span></button>
+          <div class="carousel-dots"><button class="carousel-dot" type="button" aria-label="Show Paper Cutting 1" aria-current="true"></button><button class="carousel-dot" type="button" aria-label="Show Paper Cutting 2" aria-current="false"></button></div>
+        </div></div>
+      <div class="task-copy"><h3 data-copy="tasks.1.title">Paper Cutting</h3><p data-copy="tasks.1.description">The robot stabilizes a sheet of paper with its left hand while actuating scissors with its right hand to cut along a marked straight or curved black contour and separate the designated portion.</p></div>
+    </section><section class="task-panel paired" id="panel-paper-unfolding" role="tabpanel" aria-labelledby="tab-paper-unfolding" hidden>
+      <div class="task-showcase"><div class="task-carousel" role="region" aria-roledescription="carousel" aria-label="Paper Unfolding">
+          <div class="carousel-viewport" tabindex="0" aria-label="Paper Unfolding videos"><div class="carousel-track"><div class="carousel-slide" role="group" aria-label="1 / 2" aria-hidden="false" ><div class="video-pair" data-label="Paper Unfolding 1" role="group" aria-label="Paper Unfolding 1">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-unfolding-front.jpg" src="assets/paper-unfolding-front.mp4" aria-label="Paper Unfolding 1 (front)"></video><span class="speed">4X</span></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-unfolding.jpg" src="assets/paper-unfolding.mp4" aria-label="Paper Unfolding 1 (head)"></video><span class="speed">4X</span></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Unfolding 1" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Unfolding 1 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div><div class="carousel-slide" role="group" aria-label="2 / 2" aria-hidden="true" inert><div class="video-pair" data-label="Paper Unfolding 2" role="group" aria-label="Paper Unfolding 2">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-unfolding-slide3-front.jpg" src="assets/paper-unfolding-slide3-front.mp4" aria-label="Paper Unfolding 2 (front)"></video></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/paper-unfolding-slide3-head.jpg" src="assets/paper-unfolding-slide3-head.mp4" aria-label="Paper Unfolding 2 (head)"></video></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Paper Unfolding 2" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Paper Unfolding 2 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div></div></div>
+          <button class="carousel-arrow previous" type="button" aria-label="Previous Paper Unfolding videos"><span aria-hidden="true"></span></button>
+          <button class="carousel-arrow next" type="button" aria-label="Next Paper Unfolding videos"><span aria-hidden="true"></span></button>
+          <div class="carousel-dots"><button class="carousel-dot" type="button" aria-label="Show Paper Unfolding 1" aria-current="true"></button><button class="carousel-dot" type="button" aria-label="Show Paper Unfolding 2" aria-current="false"></button></div>
+        </div></div>
+      <div class="task-copy"><h3 data-copy="tasks.2.title">Paper Unfolding</h3><p data-copy="tasks.2.description">Starting from a sheet folded in half twice, the robot coordinates both hands to separate and flatten both folds in reverse order until the sheet is restored to its unfolded state.</p></div>
+    </section><section class="task-panel" id="panel-thread-cutting" role="tabpanel" aria-labelledby="tab-thread-cutting" hidden>
+      <div class="task-showcase"><div class="task-videos"><div class="task-media"><video controls muted loop playsinline preload="none" poster="assets/thread-cutting.jpg" src="assets/thread-cutting.mp4" aria-label="Thread Cutting 1 (head)"></video><span class="speed">4X</span></div></div></div>
+      <div class="task-copy"><h3 data-copy="tasks.3.title">Thread Cutting</h3><p data-copy="tasks.3.description">The robot grasps scissors with its right hand, approaches a thin thread secured to a stand, aligns the blades around the thread, and closes them to sever it.</p></div>
+    </section>
+    </div></section>
+
+    <section class="bibtex-section" id="bibtex"><div class="wrap">
+      <h2 class="section-title">BibTeX</h2>
+      <div class="bibtex-toolbar"><button class="button copy-button" type="button" aria-label="Copy BibTeX" aria-live="polite">Copy</button></div>
+      <pre tabindex="0"><code id="bibtex-code">@misc{focus4dex,
+  title = {{Focus4Dex: Action-Guided Visual Information Selection and Utilization for Dexterous Manipulation}},
+  author = {Wensi Huang and Yangkun Zhu and Tutian Tang and Wanli Xing and Xingyu Ji and Yang Li and Feng Zhao and Kaifeng Zhang and Qiaojun Yu and Weinan Zhang}
+}</code></pre>
+    </div></section>
+  </main>
+  <footer class="wrap"><a href="#top" class="wordmark"><img src="assets/logo.png" alt="Focus4Dex" width="1774" height="887"></a><a href="assets/paper.pdf" target="_blank" rel="noopener">Paper</a></footer>
+</body></html>
