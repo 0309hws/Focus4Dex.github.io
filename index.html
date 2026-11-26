@@ -121,8 +121,15 @@
           <div class="carousel-dots"><button class="carousel-dot" type="button" aria-label="Show Paper Unfolding 1" aria-current="true"></button><button class="carousel-dot" type="button" aria-label="Show Paper Unfolding 2" aria-current="false"></button></div>
         </div></div>
       <div class="task-copy"><h3 data-copy="tasks.2.title">Paper Unfolding</h3><p data-copy="tasks.2.description">Starting from a sheet folded in half twice, the robot coordinates both hands to separate and flatten both folds in reverse order until the sheet is restored to its unfolded state.</p></div>
-    </section><section class="task-panel" id="panel-thread-cutting" role="tabpanel" aria-labelledby="tab-thread-cutting" hidden>
-      <div class="task-showcase"><div class="task-videos"><div class="task-media"><video controls muted loop playsinline preload="none" poster="assets/thread-cutting.jpg" src="assets/thread-cutting.mp4" aria-label="Thread Cutting 1 (head)"></video><span class="speed">4X</span></div></div></div>
+    </section><section class="task-panel paired" id="panel-thread-cutting" role="tabpanel" aria-labelledby="tab-thread-cutting" hidden>
+      <div class="task-showcase"><div class="video-pair" data-label="Thread Cutting 1" role="group" aria-label="Thread Cutting 1">
+              <div class="task-videos"><div class="task-media"><video controls muted playsinline preload="none" poster="assets/thread-cutting-front.jpg" src="assets/thread-cutting-front.mp4" aria-label="Thread Cutting 1 (front)"></video><span class="speed">4X</span></div><div class="task-media"><video controls muted playsinline preload="none" poster="assets/thread-cutting.jpg" src="assets/thread-cutting.mp4" aria-label="Thread Cutting 1 (head)"></video><span class="speed">4X</span></div></div>
+              <div class="pair-controls" hidden>
+                <button class="pair-toggle" type="button" aria-label="Play Thread Cutting 1" data-playing="false"><span class="playback-symbol" aria-hidden="true"></span></button>
+                <input class="pair-progress" type="range" min="0" max="0" step="0.01" value="0" disabled aria-label="Thread Cutting 1 video progress">
+                <output class="pair-time">0:00 / 0:00</output>
+              </div>
+            </div></div>
       <div class="task-copy"><h3 data-copy="tasks.3.title">Thread Cutting</h3><p data-copy="tasks.3.description">The robot grasps scissors with its right hand, approaches a thin thread secured to a stand, aligns the blades around the thread, and closes them to sever it.</p></div>
     </section>
     </div></section>

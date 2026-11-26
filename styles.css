@@ -93,7 +93,7 @@ figcaption { text-align: center; margin-top: 17px; font-size: 16px; color: var(-
 .pair-progress:focus-visible { outline: 3px solid #3796d0; outline-offset: 3px; }
 .pair-time { min-width: 88px; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .video-pair video { cursor: pointer; }
-.task-carousel { position: relative; min-width: 0; padding: 22px 22px 8px; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 8px 25px #0206170b; }
+.task-carousel, .task-showcase > .video-pair { position: relative; min-width: 0; padding: 22px 22px 8px; background: #fff; border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 8px 25px #0206170b; }
 .carousel-viewport { overflow: hidden; min-width: 0; border-radius: 12px; touch-action: pan-y; }
 .carousel-track { display: flex; align-items: flex-start; transition: transform .38s ease; }
 .carousel-slide { flex: 0 0 100%; width: 100%; min-width: 0; }
@@ -179,7 +179,7 @@ footer p, footer > a:last-child { color: var(--muted); font-size: 14px; }
   .paired .task-videos { grid-template-columns: 1fr; gap: 16px; }
   .task-showcase { gap: 28px; }
   .pair-controls { gap: 9px; padding: 8px; }
-  .task-carousel { padding: 12px 12px 4px; border-radius: 16px; }
+  .task-carousel, .task-showcase > .video-pair { padding: 12px 12px 4px; border-radius: 16px; }
   .carousel-arrow.previous { left: -12px; }
   .carousel-arrow.next { right: -12px; }
   .pair-time { min-width: 80px; font-size: 13px; }
