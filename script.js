@@ -53,10 +53,40 @@ document.addEventListener('visibilitychange', () => {
     document.querySelectorAll('video').forEach(video => video.pause());
   }
 });
-const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) document.querySelectorAll('nav a').forEach(a => a.classList.toggle('active', a.hash === '#' + entry.target.id));
-}), {rootMargin:'-10% 0px -65% 0px'});
-document.querySelectorAll('main > section[id]').forEach(section => sectionObserver.observe(section));
+const navSections = [...document.querySelectorAll('nav a')].map(link => ({
+  link, section: document.querySelector(link.hash),
+})).filter(item => item.section);
+if (navSections.length) {
+  const header = document.querySelector('.site-header');
+  let navFrame = 0;
+  const updateNavigation = () => {
+    navFrame = 0;
+    // Follow the section occupying the main viewing area below the header.
+    // Task switches can move a section down through browser scroll anchoring.
+    const headerBottom = header?.getBoundingClientRect().bottom || 0;
+    const marker = Math.max(0, Math.min((headerBottom + window.innerHeight) / 2, window.innerHeight - 1));
+    let active = null;
+    navSections.forEach(({ section }) => {
+      if (section.getBoundingClientRect().top <= marker) active = section;
+    });
+    // The last section may be too short to reach the marker before scrolling ends.
+    if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      active = navSections.at(-1).section;
+    }
+    navSections.forEach(({ link, section }) => link.classList.toggle('active', section === active));
+  };
+  const scheduleNavigation = () => {
+    if (!navFrame) navFrame = requestAnimationFrame(updateNavigation);
+  };
+  window.addEventListener('scroll', scheduleNavigation, { passive: true });
+  window.addEventListener('resize', scheduleNavigation);
+  window.addEventListener('hashchange', scheduleNavigation);
+  window.addEventListener('load', scheduleNavigation);
+  const layoutObserver = new ResizeObserver(scheduleNavigation);
+  layoutObserver.observe(document.querySelector('main'));
+  if (header) layoutObserver.observe(header);
+  updateNavigation();
+}
 
 const copyButton = document.querySelector('.copy-button');
 copyButton.addEventListener('click', async () => {
